@@ -68,9 +68,7 @@ function pe() {
 /* @Desc Use Only for debug : echo + exit  e.g. ee("hello",1,array("My Value","Test Value"));
  * @params : string and array both allowed
  */
-
 function ee() {
-
     $args = func_get_args();
     foreach ($args as $k => $arg) {
         if (is_array($arg)) {
@@ -85,7 +83,6 @@ function ee() {
 }
 
 /* @Desc : Print anying no of times : e.g printNtimes('<br/>',10); */
-
 function printNtimes($printValue, $no = 1) {
     for ($i = 1; $i <= $no; $i++) {
         echo $printValue;
@@ -95,7 +92,6 @@ function printNtimes($printValue, $no = 1) {
 /*
  * @Var Dumper multiple e.g. vd($arr1,$arr2,$var1,$var2) and exit
  */
-
 function vd() {
     global $preCss;
     global $is_backtrace;
@@ -148,7 +144,7 @@ function str_titlecase($string, $cases = []) {
 }
 
 /*
- * @Desc : Change array values to title case 
+ * @Desc : Array Function : Change array values to title case 
  * @param : $array = [1=>"hello world",4=>'thank you'];
  * @return : $array = [1=>"Hello World",4=>'Thank You'];
  */
@@ -174,6 +170,8 @@ function postP($exit = false) {
 }
 
 /**
+ * @Desc : Array Function - check string start with given needle or not 
+ * @Return : boolean
  * $str = '|apples}';
  * 	echo str_endsWith($str, '}'); //Returns true
  */
@@ -183,8 +181,10 @@ function str_startsWith($haystack, $needle) {
 }
 
 /**
+ * @Desc : Array Function - check string end with given needle or not 
  * $str = '|apples}';
  * 	echo str_endsWith($str, '}'); //Returns true
+ * @Return : boolean
  */
 function str_endsWith($haystack, $needle) {
     $length = strlen($needle);
