@@ -23,9 +23,7 @@ function p() {
     $op = '<div ' . $preCss . '>';
     if ($is_backtrace) {
         $bt = debug_backtrace();
-		// echo "<pre>";
-// print_r($bt);
-// exit;
+	
         foreach ($bt as $key => $btrace) {
             if (!in_array($btrace["function"], ["p"]) && strpos($btrace["file"],"Functions.php")==false) {
                 $debugArray = $btrace;
