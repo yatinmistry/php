@@ -214,3 +214,9 @@ function pXML($xml){
 	header ("Content-Description: PHP Generated Data" );
 	exit($xml);
 }
+
+/*PHP Error Reporting On*/
+function phpError(){
+	ini_set('display_errors','On');
+	error_reportin(E_All);
+}
