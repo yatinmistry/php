@@ -206,8 +206,7 @@ function xmlToArray($xml) {
 }
 
 
-function pXML($xml){
-	
+function pXML($xml){	
 	header ("Cache-Control: no-cache, must-revalidate");
 	header ("Pragma: no-cache");
 	header ("Content-type: text/xml");
@@ -219,4 +218,9 @@ function pXML($xml){
 function phpError(){
 	ini_set('display_errors','On');
 	error_reportin(E_All);
+}
+
+/*Json Pretty Print*/
+function jsonP($arr){
+	// return "<pre>".json_encode($arr),JSON_PRETTY_PRINT)."</pre>";
 }
