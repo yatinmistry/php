@@ -220,7 +220,31 @@ function phpError(){
 	error_reportin(E_All);
 }
 
-/*Json Pretty Print*/
-function jsonP($arr){
-	echo  "<pre>".json_encode($arr,JSON_PRETTY_PRINT)."</pre>";
+/*Json Pretty Print
+ * $arr : Pass Array or Json
+ */
+function jsonP($arr,$exit=true){
+	global $preCss;
+	global $is_backtrace;
+	
+	$op = "<div ".$preCss.">";
+	 if ($is_backtrace) {
+        $bt = debug_backtrace();
+        foreach ($bt as $key => $btrace) {
+            if (!in_array($btrace["function"], ["p"])) {
+                $debugArray = $btrace;
+                break;
+            }
+        }		
+		$op .= '<div style="background-color:#DDD;padding:3px;margin-top:1px;"><b>' . $debugArray['file'] . '</b>: <b>' . $debugArray['line'] . '</b></div>';
+    }
+	$op .= "<pre style='border: 1px dotted;padding:10px;background-color:#FFF;'>";
+	if(is_array($arr)){
+		$op .= "<pre>".json_encode($arr,JSON_PRETTY_PRINT)."</pre>";
+	}else{
+		$op .= "<pre>".json_encode(json_decode($arr),JSON_PRETTY_PRINT)."</pre>";
+	}
+	$op .= "</div></div>";
+	echo $op;	
+	if($exit)exit();
 }
