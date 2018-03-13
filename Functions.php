@@ -222,5 +222,5 @@ function phpError(){
 
 /*Json Pretty Print*/
 function jsonP($arr){
-	return "<pre>".json_encode($arr),JSON_PRETTY_PRINT)."</pre>";
+	echo  "<pre>".json_encode($arr,JSON_PRETTY_PRINT)."</pre>";
 }
