@@ -238,13 +238,16 @@ function jsonP($arr,$exit=true){
         }		
 		$op .= '<div style="background-color:#DDD;padding:3px;margin-top:1px;"><b>' . $debugArray['file'] . '</b>: <b>' . $debugArray['line'] . '</b></div>';
     }
-	$op .= "<pre style='border: 1px dotted;padding:10px;background-color:#FFF;'>";
+
+	$op .= "<pre style='border: 1px dotted;padding:10px;background-color:#FFF;'>";	
 	if(is_array($arr)){
-		$op .= "<pre>".json_encode($arr,JSON_PRETTY_PRINT)."</pre>";
+		$op .= json_encode($arr,JSON_PRETTY_PRINT);
 	}else{
-		$op .= "<pre>".json_encode(json_decode($arr),JSON_PRETTY_PRINT)."</pre>";
+		$op .= json_encode(json_decode($arr),JSON_PRETTY_PRINT);
 	}
-	$op .= "</div></div>";
+	$op .= "</pre><br/>";
+	
+	$op .= "</div>";
 	echo $op;	
 	if($exit)exit();
 }
