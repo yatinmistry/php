@@ -251,3 +251,18 @@ function jsonP($arr,$exit=true){
 	echo $op;	
 	if($exit)exit();
 }
+
+
+function debugP(){
+	if(isset($_GET["debug"]) && $_GET["debug"]==1){
+	   $args = func_get_args();
+	   call_user_func_array('p', $args);
+	}
+}
+function debugPe(){
+	if(isset($_GET["debug"]) && $_GET["debug"]==1){
+	   $args = func_get_args();
+	   call_user_func_array('p', $args);
+	   exit();
+	}
+}
