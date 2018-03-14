@@ -1,1 +1,1 @@
-# php
+# PHP Commong Helper functions
