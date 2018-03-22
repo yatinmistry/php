@@ -253,13 +253,16 @@ function jsonP($arr,$exit=true){
 }
 
 
-function debugP(){
+/*@Desc: For Debuging Print. It will show only if you pass debug=1 in query string */
+function dpr(){
 	if(isset($_GET["debug"]) && $_GET["debug"]==1){
 	   $args = func_get_args();
 	   call_user_func_array('p', $args);
 	}
 }
-function debugPe(){
+
+/*@Desc: For Debuging Print. It will show only if you pass debug=1 in query string */
+function dpe(){
 	if(isset($_GET["debug"]) && $_GET["debug"]==1){
 	   $args = func_get_args();
 	   call_user_func_array('p', $args);
