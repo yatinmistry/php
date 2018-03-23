@@ -275,3 +275,17 @@ function dpe(){
 	   exit();
 	}
 }
+
+/*
+Yii:: Query and Data Print 
+@$qry: object of query 
+*/
+function qpr($qry,$data=''){
+	$data ?	pr($qry->createCommand()->rawSql,$data):pr($qry->createCommand()->rawSql);
+}
+/* Yii:: Query and Data Print + exit
+ *  @$qry: object of query 
+ */
+function qpe($qry,$data=''){
+	$data ?	pe($qry->createCommand()->rawSql,$data):pe($qry->createCommand()->rawSql);
+}
