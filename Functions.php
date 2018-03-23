@@ -220,6 +220,12 @@ function phpError(){
 	error_reportin(E_All);
 }
 
+// Debug PHP Error from your end : add ?phpEr=true
+function debugPhpError(){
+	if(isset($_GET["phpEr"]) && $_GET["phpEr"] ===true){ phpError();}
+}
+debugPhpError();
+
 /*Json Pretty Print
  * $arr : Pass Array or Json
  */
