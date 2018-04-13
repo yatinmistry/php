@@ -289,3 +289,11 @@ function qpr($qry,$data=''){
 function qpe($qry,$data=''){
 	$data ?	pe($qry->createCommand()->rawSql,$data):pe($qry->createCommand()->rawSql);
 }
+
+/*
+ *@desc: Show HTML/XML in Webpage
+ */
+function code($code){
+    return "<pre><xmp>$code</xmp></pre>";
+    return "<pre>". str_replace(">","&gt;",str_replace("<","&lt;",$code))."</pre>";
+}
