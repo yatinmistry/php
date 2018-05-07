@@ -297,3 +297,11 @@ function code($code){
     return "<pre><xmp>$code</xmp></pre>";
     return "<pre>". str_replace(">","&gt;",str_replace("<","&lt;",$code))."</pre>";
 }
+
+function string_after_number($str){
+    $ln =strlen($str);
+    for($i=0;$i<$ln;$i++){
+        if(is_numeric($str[$i]))break;      
+    }
+    return substr($str,$i,$ln);
+}
