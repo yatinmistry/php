@@ -305,3 +305,8 @@ function string_after_number($str){
     }
     return substr($str,$i,$ln);
 }
+
+function jsonPretty($data){
+	$data = !is_array($data)?json_decode($data):$data;
+	return "<pre style='border:0;background-color:transparent;'>".json_encode($data,JSON_PRETTY_PRINT)."</pre>";
+}
