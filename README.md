@@ -1,1 +1,1 @@
-# PHP Commong Helper functions
+# PHP Common Helper functions
