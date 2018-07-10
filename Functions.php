@@ -217,7 +217,7 @@ function pXML($xml){
 /*PHP Error Reporting On*/
 function phpError(){
 	ini_set('display_errors','On');
-	error_reportin(E_All);
+	error_reporting(E_All);
 }
 
 // Debug PHP Error from your end : add ?phpEr=true
