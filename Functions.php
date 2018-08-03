@@ -71,7 +71,7 @@ function pe() {
 function ee() {
     $args = func_get_args();
     foreach ($args as $k => $arg) {
-        if (is_array($arg)) {
+        if (is_array($arg) || is_object($arg)) {
             echo '<pre>';
             print_r($arg);
             echo '</pre>';
