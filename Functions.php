@@ -310,3 +310,36 @@ function jsonPretty($data){
 	$data = !is_array($data)?json_decode($data):$data;
 	return "<pre style='border:0;background-color:transparent;'>".json_encode($data,JSON_PRETTY_PRINT)."</pre>";
 }
+
+
+function get_string_between($string, $start = "{", $end = "}") {
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) {
+            return '';
+        }
+
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+
+function findVariables($template, $findStart = "{", $findEnd = "}", $placeHolderStart = '<',$placeHolderEnd='>') {
+
+    $cli_config_arr = explode("\n", $template);
+    $variables = [
+        "replacements" => [],
+        "master" => [],
+    ];
+    foreach ($cli_config_arr as $key => $line) {
+        $variable = get_string_between($line, $findStart, $findEnd);
+        if (!empty($variable) && strpos($variable, ":") === false) {
+            $variables["replacements"]["{" . $variable . "}"] = '"' . $placeHolderStart . $variable . $placeHolderEnd . '"';
+            $variables["master"][] = $variable;
+
+        }
+    }
+    $variables["master"] = array_unique($variables["master"]);
+    $variables["replacements"] = array_unique($variables["replacements"]);
+    return $variables;
+}
