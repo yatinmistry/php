@@ -343,3 +343,31 @@ function findVariables($template, $findStart = "{", $findEnd = "}", $placeHolder
     $variables["replacements"] = array_unique($variables["replacements"]);
     return $variables;
 }
+
+/*
+ * @DESCCheck Given data is valid json or not 
+ * @return : true|false
+ */
+function is_json($data = NULL) {
+    if (!empty($data)) {
+        @json_decode($data);
+        return (json_last_error() === JSON_ERROR_NONE);
+    }
+    return false;
+}
+
+
+function insertArrayAtPosition($array,$insertArray,$position){
+    $i = 1;
+    $newBlockArray =[];
+    foreach($array as $key=>$value){                    
+        if($i == $position){
+            foreach($insertArray as $key1=>$value1){
+                $newBlockArray[$key1] = $value1;                
+            }
+        }
+        $i++;
+        $newBlockArray[$key] = $value;
+    }
+    return $newBlockArray;
+}
