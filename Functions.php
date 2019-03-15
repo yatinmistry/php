@@ -357,17 +357,43 @@ function is_json($data = NULL) {
 }
 
 
+/*
+ * @Desc : Insert array at specific position in given array
+ * @param : $array = [
+ *    "key1"=>"value1",	
+ *    "key2"=>"value2",	
+ *    "key3"=>"value3",
+ *    "key4"=>"value4",	 
+ * ];
+ *  @param : $insertArray = ["transaction-id"=>100];
+ *  @param : $position = 3
+ * @response : 
+ * $array = [
+ *    "key1"=>"value1",	
+ *    "key2"=>"value2",
+ *    "transaction-id"=>100 
+ *    "key3"=>"value3",
+ *    "key4"=>"value4",	 
+ * ];
+ */
 function insertArrayAtPosition($array,$insertArray,$position){
-    $i = 1;
-    $newBlockArray =[];
-    foreach($array as $key=>$value){                    
-        if($i == $position){
-            foreach($insertArray as $key1=>$value1){
-                $newBlockArray[$key1] = $value1;                
-            }
-        }
-        $i++;
-        $newBlockArray[$key] = $value;
-    }
-    return $newBlockArray;
+	$i = 1;
+	$isAdded = false;
+	$newBlockArray =[];
+	foreach($array as $key=>$value){					
+		if($i == $position){
+			$isAdded = true;
+			foreach($insertArray as $key1=>$value1){
+				$newBlockArray[$key1] = $value1;				
+			}
+		}
+		$i++;
+		$newBlockArray[$key] = $value;
+	}
+	if(!$isAdded && $i==$position){
+		foreach($insertArray as $key1=>$value1){
+				$newBlockArray[$key1] = $value1;				
+		}
+	}
+	return $newBlockArray;
 }
