@@ -38,19 +38,17 @@ Class Logger{
 
 	private function buildMessage($logMessage,$fileInfo){
 
-		$msg = "[".date ('Y-m-d H:i:s') . "] ";
+		$msg = "[".date ('Y-m-d H:i:s') . "] "; //Date Time 
 
-		// Add Transaction id in logs
 		if($transaction_id = $this->getTransactionId()){
-			$msg .= "[transaction_id=".$transaction_id."] ";
+			$msg .= "[transaction_id=".$transaction_id."] "; // Transaction Id 
 		} 	
-		$msg .= $fileInfo.PHP_EOL;
-		$msg .= $logMessage . PHP_EOL.PHP_EOL; 
-
-		
+		$msg .= $fileInfo.PHP_EOL; // File Info 
+		$msg .= $logMessage . PHP_EOL.PHP_EOL;  // Actual Log Message
 
 		return $msg;
 	} 	
+
 
 	// Get File Info :: File,Function,Line No :: start  
 	private function getFileInfo(){
