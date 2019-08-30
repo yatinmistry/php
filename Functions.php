@@ -403,3 +403,11 @@ function insertArrayAtPosition($array,$insertArray,$position){
 	}
 	return $newBlockArray;
 }
+
+function getVariables($string,$findStart="{{",$findEnd="}}"){
+        preg_match_all('#'.$findStart.'(.*?)'.$findEnd.'#', $string, $matches);        
+        if(isset($matches[1])){
+            return $matches[1];
+        }
+        return false;
+}
