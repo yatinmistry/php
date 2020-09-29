@@ -7,13 +7,9 @@ use yii\base\Exception;
 use yii\helpers\FileHelper;
 use backend\models\ApiLog;
 
-class SccmCommonFunction {
+class CommonFunction {
     
-     /*
-        By Jitendra
-        Date : 15th January, 2018
-        Upgraded by : Satish <Satish.Rane@infinitylabs.in>  
-    */
+   
     public static function createLog($message_log, $log_array = array(), $folder = true) {
         if (true || $message_log != "") {
             ## insert in database
@@ -82,11 +78,7 @@ class SccmCommonFunction {
         }
     } // EO createLog()
 
-    /*
-        By Jitendra
-        Date : 15th January, 2018
-        Upgraded by : Satish <Satish.Rane@infinitylabs.in>  
-    */
+  
     public static function createApiLog($message_log, $log_array = array()) {
         if ($message_log != "") {
             ## insert in database
@@ -144,84 +136,6 @@ class SccmCommonFunction {
             echo("No Log Found");
         }
     } // EO createApiLog()
-    
-    public static function createServiceInventory($log_array) {
-        $role_id = $log_array['role_id'];
-        $sql = "SELECT sdc.service_template_id, sdc.customer_id, c.first_name, c.last_name, st.template_version, 
-                st.user_variable, st.system_variable, sdc.hostname, sc.service_desc
-                from service_device_config sdc 
-                JOIN service_template st ON sdc.service_template_id = st.id 
-                JOIN service_role sr ON sr.id = st.role_id 
-                JOIN service_catalog sc ON sc.id = sr.service_id
-                JOIN customer c ON c.id = sdc.customer_id
-                WHERE sr.id = {$role_id} and nso_config is not null";
-        $results = \Yii::$app->db->createCommand($sql)->queryAll();
-
-        $serviceInventory = new ServiceInventory();
-        foreach($results as $val) {
-            $serviceInventory->service_template_id       = $val['service_template_id'];
-            $serviceInventory->customer_id               = $val['customer_id'];
-            $serviceInventory->customer_firstname        = $val['first_name'];
-            $serviceInventory->customer_lastname         = $val['last_name'];
-            $serviceInventory->service_template_version  = $val['template_version'];
-            $serviceInventory->user_defined_parameters   = $val['user_variable'];
-            $serviceInventory->system_defined_parameters = $val['system_variable'];
-            $serviceInventory->device_name               = $val['hostname'];
-            $serviceInventory->description               = $val['service_desc'];
-            $serviceInventory->created_date              = date('Y-m-d H:i:s');
-            $serviceInventory->created_by                = 1;
-            $serviceInventory->modified_date             = date('Y-m-d H:i:s');
-            $serviceInventory->modified_by               = 1;
-
-            if($serviceInventory->save()) {
-
-            } else {
-                echo "<pre>";
-                print_r($serviceInventory->getErrors());
-                exit;
-            }
-        }
-    } // EO createServiceInventory()
-
-    public function convert_multi_array_to_string($array) {
-        $str = implode("&",array_map(function($a) {return implode("~",$a);},$array));
-        return $str;
-    }
-    
-    public function curl($url, $requestType = 'GET', $data = '', $headers = array(), $xmldata = FALSE) {
-
-        $ch = curl_init($url);
-
-        if (!empty($headers)) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        }
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $requestType);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_POST, 1);
-       if(strpos($url,"https://")!==false){ 
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
-       }
-        if ($xmldata == TRUE) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-        }
-        $result = curl_exec($ch);
-        $info = curl_getinfo($ch);
-
-        curl_close($ch);
-
-        return $result;
-    }
-    
-    public function invokeLoginApi($userName,$password){
-        $loginRequest = http_build_query(['username' => $userName, 'password' => $password]);
-        $sccmCommonFunction = new sccmCommonFunction();
-//        echo \yii\helpers\Url::base(true);exit();
-//        $loginResponse = $sccmCommonFunction->curl("http://localhost:8080/SCCM/sccm_api/web/api/v1/login", 'POST', $loginRequest);
-        $loginResponse = $sccmCommonFunction->curl(Yii::$app->params['SCCM_API_URL']."v1/login", 'POST', $loginRequest);
-        return  json_decode($loginResponse, true);
-    }
+ 
 }
 ?>
